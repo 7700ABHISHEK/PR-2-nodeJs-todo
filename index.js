@@ -26,6 +26,7 @@ app.post("/add-student", (req, res) => {
         id: Date.now()
     })
     return res.redirect('/')
+
 })
 
 app.get("/delete-task", (req, res) => {

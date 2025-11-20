@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+
 </head>
 
 <body class="bg-light">
@@ -49,7 +50,7 @@
                     </div>
                 </form>
 
-                <div id="taskList" style="height: 450px; overflow-y: auto">
+                <div id="taskList" style="max-height: 450px; overflow-y: auto">
                     <% todo.map((list)=> { %>
                         <div class="p-3 mb-3 rounded shadow-sm border bg-white">
 
@@ -68,12 +69,12 @@
                                         </span>
                                     </div>
                                 </div>
-                                    <div class="d-flex gap-2">
-                                        <a href="/edit-task?taskId=<%= list.id %>"
-                                            class="btn btn-outline-primary btn-sm">Edit</a>
-                                        <a href="/delete-task?taskId=<%= list.id %>"
-                                            class="btn btn-outline-danger btn-sm">Delete</a>
-                                    </div>
+                                <div class="d-flex gap-2">
+                                    <a href="/edit-task?taskId=<%= list.id %>"
+                                        class="btn btn-outline-primary btn-sm">Edit</a>
+                                    <a href="/delete-task?taskId=<%= list.id %>"
+                                        class="btn btn-outline-danger btn-sm">Delete</a>
+                                </div>
 
                             </div>
 
@@ -86,6 +87,29 @@
         </div>
 
     </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const form = document.getElementById("taskForm");
+        const taskName = document.getElementById("taskName");
+
+        form.addEventListener("submit", function (event) {
+            if (taskName.value.trim() === "") {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: "Task name cannot be empty",
+                    icon: "error"
+                });
+
+                return false;
+            }
+        });
+    </script>
+
 
 </body>
 

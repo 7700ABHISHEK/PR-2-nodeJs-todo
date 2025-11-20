@@ -26,13 +26,14 @@
 
                 <h3 class="text-center mb-4 text-primary">Edit Task</h3>
 
-                <form action="/edit-task" method="POST">
+                <form action="/edit-task" id="taskForm" method="post">
 
                     <input type="hidden" name="id" value="<%= task.id %>">
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Task Name</label>
-                        <input type="text" class="form-control" name="taskName" value="<%= task.taskName %>" required>
+                        <input type="text" id="taskName" class="form-control" name="taskName"
+                            value="<%= task.taskName %>" required>
                     </div>
 
                     <div class="mb-3">
@@ -54,6 +55,27 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        const form = document.getElementById("taskForm");
+        const taskName = document.getElementById("taskName");
+
+        form.addEventListener("submit", function (event) {
+            if (taskName.value.trim() === "") {
+                event.preventDefault();
+
+                Swal.fire({
+                    title: "Task name cannot be empty",
+                    icon: "error"
+                });
+
+                return false;
+            }
+        });
+    </script>
 
 </body>
 
