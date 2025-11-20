@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-4">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary d-flex align-items-center justify-content-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" width="40" class="me-2">
+                My Todo App
+            </h2>
+            <p class="text-muted mt-2">Stay organized and productive</p>
+        </div>
+
+        <div class="card shadow border-0 mx-auto" style="max-width: 750px;">
+            <div class="card-body p-4">
+
+                <form action="/add-student" id="taskForm" method="post" class="mb-4">
+                    <div class="row g-3">
+
+                        <div class="col-12 col-md-6 col-lg-7">
+                            <input id="taskName" name="taskName" type="text" class="form-control form-control-lg"
+                                placeholder="Enter task name" required>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <select id="taskPriority" name="taskPriority" class="form-select form-select-lg" required>
+                                <option value="" disabled selected>Priority</option>
+                                <option class="text-success" value="Low">Low</option>
+                                <option class="text-warning" value="Medium">Medium</option>
+                                <option class="text-danger" value="High">High</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3 col-lg-2 d-grid">
+                            <button class="btn btn-primary btn-lg">Add</button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <div id="taskList" style="height: 450px; overflow-y: auto">
+                    <% todo.map((list)=> { %>
+                        <div class="p-3 mb-3 rounded shadow-sm border bg-white">
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start gap-3">
+
+                                <div class="d-flex align-items-start flex-grow-1">
+                                    <div>
+                                        <span class="fs-6 fw-semibold text-dark text-break d-block">
+                                            <%= list.taskName %>
+                                        </span>
+                                        <span class="badge mt-2 
+                                            <%= list.taskPriority === 'High' ? 'bg-danger' 
+                                            : list.taskPriority === 'Medium' ? 'bg-warning text-dark' 
+                                            : 'bg-success' %>">
+                                            <%= list.taskPriority %>
+                                        </span>
+                                    </div>
+                                </div>
+                                    <div class="d-flex gap-2">
+                                        <a href="/edit-task?taskId=<%= list.id %>"
+                                            class="btn btn-outline-primary btn-sm">Edit</a>
+                                        <a href="/delete-task?taskId=<%= list.id %>"
+                                            class="btn btn-outline-danger btn-sm">Delete</a>
+                                    </div>
+
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
